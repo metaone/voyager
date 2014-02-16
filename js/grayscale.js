@@ -18,10 +18,15 @@ $(function() {
     });
 });
 
+// Picture slider
+$(document).ready(function () {
+    $('.carousel').carousel();
+});
+
 //Google Map Skin - Get more at http://snazzymaps.com/
 var myOptions = {
-    zoom: 15,
-    center: new google.maps.LatLng(53.385873, -1.471471),
+    zoom: 17,//15,
+    center: new google.maps.LatLng(49.841304, 24.029888),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     disableDefaultUI: true,
     styles: [{
@@ -135,3 +140,22 @@ var myOptions = {
 };
 
 var map = new google.maps.Map(document.getElementById('map'), myOptions);
+
+var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(49.841304, 24.029888),
+    map: map,
+    title: 'Voyager Hostel'
+});
+
+var contentString = '<div id="content" style="color: #000000">'+
+    '<p>Voyager Hostel</p>' +
+    '<p>voyager.hostel@gmail.com</p>' +
+    '</div>';
+
+var infowindow = new google.maps.InfoWindow({
+    content: contentString
+});
+
+google.maps.event.addListener(marker, 'click', function() {
+    infowindow.open(map, marker);
+});
